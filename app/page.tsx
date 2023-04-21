@@ -1,7 +1,5 @@
 import Link from 'next/link';
 
-import './globals.css';
-
 export default function Home() {
   return (
     <div className="relative isolate px-6 pt-14 lg:px-8">

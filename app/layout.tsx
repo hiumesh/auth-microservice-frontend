@@ -1,4 +1,6 @@
 import { cookies } from 'next/headers';
+import './globals.css';
+import 'antd/dist/reset.css';
 
 import Navbar from "@/ui/navbar";
 import { AuthProvider } from "@/providers/auth/AuthProvider";
@@ -52,7 +54,7 @@ export default async function RootLayout({
 
       <body className="overflow-y-scroll bg-gray-50">
         <AuthProvider session={currentUser}>
-           <Navbar user={{}}/>
+          <Navbar user={{}}/>
           {children}
         </AuthProvider>
       </body>

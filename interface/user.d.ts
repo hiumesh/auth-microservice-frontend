@@ -1,4 +1,5 @@
 import { ApiResponse } from "@/interface/api";
+import { Role } from "./role";
 
 export interface UserSession {
   Id: number,
@@ -7,6 +8,21 @@ export interface UserSession {
   Roles: string[],
   Permissions: string[],
 }
+
+export interface User {
+  Id: number,
+  Email: string,
+  UserName: string,
+  Status: string,
+  Roles: Role[],
+}
+
+export interface UserList {
+  count: number,
+  rows: User[],
+}
+
+export type UserListAPI = ApiResponse<UserList>
 
 export interface LoginData {
   email: string

@@ -1,25 +1,36 @@
 'use client';
 
 import { MagnifyingGlassIcon } from '@heroicons/react/24/solid';
-import { usePathname, useRouter } from 'next/navigation';
-import { useTransition } from 'react';
+import { useEffect, useState, ChangeEvent, useRef, Dispatch } from 'react';
 
-export default function Search({ disabled }: { disabled?: boolean }) {
-  const { replace } = useRouter();
-  const pathname = usePathname();
-  const [isPending, startTransition] = useTransition();
+interface SearchPropeTypes {
+  disabled?: boolean
+  loading: boolean
+  setQueryE: Dispatch<string>
+}
 
-  function handleSearch(term: string) {
-    const params = new URLSearchParams(window.location.search);
-    if (term) {
-      params.set('q', term);
+export default function Search({ disabled, loading, setQueryE }: SearchPropeTypes) {
+
+  const [searchTerm, setSearchTerm] = useState('');
+  const isMounted = useRef(false);
+
+  
+  useEffect(() => {
+    let delayDebounceFn: undefined | ReturnType<typeof setTimeout>;
+    if (isMounted.current) {
+      delayDebounceFn = setTimeout(() => {
+        setQueryE(searchTerm);
+      }, 500);
     } else {
-      params.delete('q');
-    }
+      isMounted.current = true;
+    }  
 
-    startTransition(() => {
-      replace(`${pathname}?${params.toString()}`);
-    });
+    return () => clearTimeout(delayDebounceFn);
+  }, [searchTerm, setQueryE]);
+
+  function handleSearchInputChange(event: ChangeEvent<HTMLInputElement>) {
+    if (typeof event.target.value === "string") setSearchTerm(event.target.value);
+    else setSearchTerm("");
   }
 
   return (
@@ -45,11 +56,12 @@ export default function Search({ disabled }: { disabled?: boolean }) {
           className="h-10 block w-full rounded-md border border-gray-200 pl-9 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
           placeholder="Search by name..."
           spellCheck={false}
-          onChange={(e) => handleSearch(e.target.value)}
+          value={searchTerm}
+          onChange={handleSearchInputChange}
         />
       </div>
 
-      {isPending && (
+      {loading && (
         <div className="absolute right-0 top-0 bottom-0 flex items-center justify-center">
           <svg
             className="animate-spin -ml-1 mr-3 h-5 w-5 text-gray-700"
@@ -63,7 +75,7 @@ export default function Search({ disabled }: { disabled?: boolean }) {
               cy="12"
               r="10"
               stroke="currentColor"
-              stroke-width="4"
+              strokeWidth="4"
             />
             <path
               className="opacity-75"

@@ -10,12 +10,12 @@ export const demos: { name: string; items: Item[] }[] = [
     items: [
       {
         name: 'User',
-        slug: 'user',
+        slug: 'dashboard/user-configration/user',
         description: 'Create UI that is shared across routes',
       },
       {
         name: 'Role',
-        slug: 'role',
+        slug: 'dashboard/user-configration/role',
         description: 'Organize routes without affecting URL paths',
       },
     ],

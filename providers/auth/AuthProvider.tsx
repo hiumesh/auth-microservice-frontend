@@ -5,6 +5,7 @@ import { UserSession, UserSessionWithToken, LoginData, LoginApiResponse, Refresh
 import { ApiResponse } from '@/interface/api';
 import { baseURL, appBaseURL } from '@/app/config'
 
+
 interface AuthContextData {
   isAuthenticated: boolean
   currentUser: UserSession | null
@@ -46,7 +47,9 @@ const AuthProvider = ({ children, session }: AuthProviderProps) => {
     }, 600000); 
     return () => clearInterval(timer);
   }, []);
-
+  useEffect(() => {
+    if (accessToken) document.cookie = `access-token=${accessToken}`;
+  }, [accessToken]);
   useEffect(() => {
     if (session) {
       setCurrentUser(session.userSession);
