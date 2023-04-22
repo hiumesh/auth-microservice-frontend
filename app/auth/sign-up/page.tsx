@@ -3,7 +3,7 @@
 import { FormEvent, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Button } from "@tremor/react";
+import { Button } from "antd";
 import { useAuth } from "@/providers/auth/AuthProvider";
 
 function SignUpView() {
@@ -121,7 +121,7 @@ function SignUpView() {
           </label>
         </div>
       </div>
-      <Button type="submit" size="lg" loading={loading}>
+      <Button htmlType="submit" type="primary" shape="round" className="bg-[#1677ff]" size="large" loading={loading}>
         Create an account
       </Button>
       <p className="text-sm font-light text-gray-500 dark:text-gray-400">

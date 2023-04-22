@@ -6,7 +6,7 @@ import Container from './container';
 
 // const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
-export async function getInitialUsers(): Promise<UserListAPI | null> {
+async function getInitialUsers(): Promise<UserListAPI | null> {
   const cookieStore = cookies();
   const token = cookieStore.get('access-token');
 

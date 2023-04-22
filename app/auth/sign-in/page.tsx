@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { FormEvent, useState } from "react";
-import { Button } from "@tremor/react";
+import { Button } from "antd";
 
 import { useAuth } from "@/providers/auth/AuthProvider";
 
@@ -68,7 +68,7 @@ function SignInView() {
         />
       </div>
 
-      <Button type="submit" size="lg" loading={loading}>
+      <Button htmlType="submit" type="primary" shape="round" className="bg-[#1677ff]" size="large" loading={loading}>
         Login to account
       </Button>
       <p className="text-sm font-light text-gray-500 dark:text-gray-400">

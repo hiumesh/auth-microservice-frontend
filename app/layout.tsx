@@ -54,7 +54,7 @@ export default async function RootLayout({
 
       <body className="overflow-y-scroll bg-gray-50">
         <AuthProvider session={currentUser}>
-          <Navbar user={{}}/>
+          <Navbar />
           {children}
         </AuthProvider>
       </body>
