@@ -25,13 +25,13 @@ export const demos: { name: string; items: Item[] }[] = [
     items: [
       {
         name: 'Microservice',
-        slug: 'microservice',
+        slug: 'dashboard/global-configration/microservice',
         description:
           'Create meaningful Loading UI for specific parts of an app',
       },
       {
         name: 'Permissions',
-        slug: 'permissions',
+        slug: 'dashboard/global-configration/permissions',
         description: 'Create Error UI for specific parts of an app',
       },
     ],
