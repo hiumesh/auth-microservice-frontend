@@ -31,7 +31,7 @@ export const demos: { name: string; items: Item[] }[] = [
       },
       {
         name: 'Permissions',
-        slug: 'dashboard/global-configration/permissions',
+        slug: 'dashboard/global-configration/permission',
         description: 'Create Error UI for specific parts of an app',
       },
     ],
