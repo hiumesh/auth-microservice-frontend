@@ -4,7 +4,7 @@ import { Form, Input, Select, Button } from "antd";
 import { useState, useCallback } from "react";
 import useSWR from "swr";
 
-import { Permission } from "@/interface/permission";
+import { Permission, PermissionListAPI } from "@/interface/permission";
 
 import { useAuth } from "@/providers/auth/AuthProvider";
 import { ApiResponse } from "@/interface/api";
@@ -42,7 +42,7 @@ export default function MicroserviceForm({
           Authorization: `Bearer ${accessToken}`,
         },
       }).then(async (res) => {
-        const responseBody = (await res.json()) as ApiResponse<Permission[]>;
+        const responseBody = (await res.json()) as PermissionListAPI;
         return responseBody.data;
       }),
     [accessToken]
@@ -57,6 +57,11 @@ export default function MicroserviceForm({
     if (microserviceForm.editData) form.setFieldsValue({ name: microserviceForm.editData?.Name, description: microserviceForm.editData?.Description, permissions: microserviceForm.editData?.Permissions.map((per) => per.Name), endpoint: microserviceForm.editData.Endpoint })
     else form.resetFields();
   }
+
+  const selectOptions = permissions?.rows ? permissions.rows?.map((per) => ({
+    label: per.Name,
+    value: per.Name,
+  })) : [];
 
   return (
     <div>
@@ -85,10 +90,7 @@ export default function MicroserviceForm({
               size="large"
               
               loading={isLoading}
-              options={(permissions || []).map((per) => ({
-                label: per.Name,
-                value: per.Name,
-              }))}
+              options={selectOptions}
               mode="multiple"
               onSearch={(value) => setPermissionName(value)}
             />
