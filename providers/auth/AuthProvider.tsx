@@ -3,7 +3,7 @@
 import { createContext, useContext, useState, useEffect } from 'react'
 import { UserSession, UserSessionWithToken, LoginData, LoginApiResponse, RefreshApiResponse, SignUpData  } from '@/interface/user'
 import { ApiResponse } from '@/interface/api';
-import { baseURL, appBaseURL } from '@/app/config'
+import { appBaseURL } from '@/app/config'
 
 
 interface AuthContextData {
@@ -44,7 +44,7 @@ const AuthProvider = ({ children, session }: AuthProviderProps) => {
   useEffect(() => {
     const timer = setInterval(() => {
       checkTokenExpiration();
-    }, 600000); 
+    }, 300000); 
     return () => clearInterval(timer);
   }, []);
   useEffect(() => {
@@ -153,7 +153,7 @@ const AuthProvider = ({ children, session }: AuthProviderProps) => {
 
   const refreshSession = async () => {
     return new Promise<void>((resolve, reject) => {
-      fetch(`${baseURL}/auth/refresh`, {
+      fetch(`${appBaseURL}/auth/refresh`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
