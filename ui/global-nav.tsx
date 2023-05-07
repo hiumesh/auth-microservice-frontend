@@ -3,7 +3,7 @@
 import { demos, type Item } from '@/lib/demos';
 import { NextLogo } from '@/ui/next-logo';
 import Link from 'next/link';
-import { useSelectedLayoutSegment } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
 import { useState } from 'react';
@@ -24,7 +24,7 @@ export function GlobalNav() {
             <NextLogo />
           </div>
 
-          <h3 className="font-semibold tracking-wide text-gray-400 group-hover:text-gray-50">
+          <h3 className="font-semibold tracking-wide bg-gradient-to-r from-vercel-cyan via-vercel-blue to-vercel-violet inline-block text-transparent bg-clip-text">
             Navigation <span className="Work in progress">(WIP)</span>
           </h3>
         </Link>
@@ -34,7 +34,7 @@ export function GlobalNav() {
         className="group absolute right-0 top-0 flex h-14 items-center gap-x-2 px-4 lg:hidden"
         onClick={() => setIsOpen(!isOpen)}
       >
-        <div className="font-medium text-gray-100 group-hover:text-gray-400">
+        <div className="font-medium text-gray-400 group-hover:text-gray-600">
           Menu
         </div>
         {isOpen ? (
@@ -54,7 +54,7 @@ export function GlobalNav() {
           {demos.map((section) => {
             return (
               <div key={section.name}>
-                <div className="mb-2 px-3 text-xs font-semibold uppercase tracking-wider text-gray-400/80">
+                <div className="mb-2 px-3 text-xs font-semibold uppercase tracking-wider text-slate-800">
                   <div>{section.name}</div>
                 </div>
 
@@ -79,18 +79,19 @@ function GlobalNavItem({
   item: Item;
   close: () => false | void;
 }) {
-  const segment = useSelectedLayoutSegment();
-  const isActive = item.slug === segment;
+  const path = usePathname();
+
+  const isActive = path?.match(item.slug)
 
   return (
     <Link
       onClick={close}
       href={`/${item.slug}`}
       className={clsx(
-        'block rounded-md px-3 py-2 text-sm font-medium hover:text-gray-300',
+        'block rounded-md px-3 py-2 text-sm font-medium hover:text-slate-700',
         {
-          'text-gray-400 hover:bg-gray-800': !isActive,
-          'text-white': isActive,
+          'text-slate-500 hover:bg-gray-50': !isActive,
+          'text-blue-500': isActive,
         },
       )}
     >

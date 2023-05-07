@@ -16,14 +16,14 @@ function Params() {
             <span className="px-1">
               <span
                 key={key}
-                className="animate-[highlight_1s_ease-in-out_1] text-gray-100"
+                className="animate-[highlight_1s_ease-in-out_1] text-gray-600"
               >
                 {key}
               </span>
               <span>=</span>
               <span
                 key={value}
-                className="animate-[highlight_1s_ease-in-out_1] text-gray-100"
+                className="animate-[highlight_1s_ease-in-out_1] text-gray-600"
               >
                 {value}
               </span>
@@ -70,7 +70,7 @@ export function AddressBar() {
                     <span>
                       <span
                         key={segment}
-                        className="animate-[highlight_1s_ease-in-out_1] rounded-full px-1.5 py-0.5 text-gray-100"
+                        className="animate-[highlight_1s_ease-in-out_1] rounded-full px-1.5 py-0.5 text-gray-600"
                       >
                         {segment}
                       </span>

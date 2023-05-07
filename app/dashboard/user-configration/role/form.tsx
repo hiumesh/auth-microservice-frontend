@@ -4,10 +4,9 @@ import { Form, Input, Select, Button } from "antd";
 import { useState, useCallback } from "react";
 import useSWR from "swr";
 
-import { Permission } from "@/interface/permission";
+import { PermissionListAPI } from "@/interface/permission";
 
 import { useAuth } from "@/providers/auth/AuthProvider";
-import { ApiResponse } from "@/interface/api";
 import { Role } from "@/interface/role";
 import { baseURL } from "@/app/config";
 
@@ -42,7 +41,7 @@ export default function RoleForm({
           Authorization: `Bearer ${accessToken}`,
         },
       }).then(async (res) => {
-        const responseBody = (await res.json()) as ApiResponse<Permission[]>;
+        const responseBody = (await res.json()) as PermissionListAPI;
         return responseBody.data;
       }),
     [accessToken]
@@ -58,6 +57,10 @@ export default function RoleForm({
     else form.resetFields();
   }
 
+  const selectOptions = permissions?.rows ? permissions.rows?.map((per) => ({
+    label: per.Name,
+    value: per.Name,
+  })) : [];
   return (
     <div>
       <Button
@@ -85,10 +88,7 @@ export default function RoleForm({
               size="large"
               
               loading={isLoading}
-              options={(permissions || []).map((per) => ({
-                label: per.Name,
-                value: per.Name,
-              }))}
+              options={selectOptions}
               mode="multiple"
               onSearch={(value) => setPermissionName(value)}
             />
